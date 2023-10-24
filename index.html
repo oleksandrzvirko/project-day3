@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Students Table</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Таблиця студентів</h1>
+        <input type="text" v-model="searchQuery" placeholder="Пошук за прізвищем">
+        <table>
+            <thead>
+                <tr>
+                    <th>ПІБ</th>
+                    <th>Група</th>
+                    <th>Рік народження</th>
+                    <th>Практика</th>
+                    <th>Видалити</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="student in filteredStudents" :key="student.id" :class="{ 'highlighted': student.highlighted }">
+                    <td>{{ student.fullName }}</td>
+                    <td>{{ student.group }}</td>
+                    <td>{{ student.birthYear }}</td>
+                    <td><input type="checkbox" v-model="student.passedPractical"></td>
+                    <td><button @click="deleteStudent(student.id)">Видалити</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Додати нового студента</h2>
+        <form @submit.prevent="addStudent">
+            <label for="fullName">ПІБ:</label>
+            <input type="text" id="fullName" v-model="newStudent.fullName" required>
+            
+            <label for="group">Група:</label>
+            <input type="text" id="group" v-model="newStudent.group" required>
+            
+            <label for="birthYear">Рік народження:</label>
+            <input type="number" id="birthYear" v-model="newStudent.birthYear" required>
+            
+            <label for="passedPractical">Практика:</label>
+            <input type="checkbox" id="passedPractical" v-model="newStudent.passedPractical">
+            
+            <button type="submit">Додати</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="app.js"></script>
+</body>
+</html>
