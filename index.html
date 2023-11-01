@@ -10,8 +10,8 @@
     <div id="app">
         <h1>Таблиця студентів</h1>
         <input type="text" v-model="searchQuery" placeholder="Пошук за прізвищем">
-        <table>
-            <thead>
+        <table class="w-full border-3 text-left">
+            <thead class="border-b bg-slate-300">
                 <tr>
                     <th>ПІБ</th>
                     <th>Група</th>
@@ -20,13 +20,13 @@
                     <th>Видалити</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr v-for="student in filteredStudents" :key="student.id" :class="{ 'highlighted': student.highlighted }">
-                    <td>{{ student.fullName }}</td>
+            <tbody class="bg-slate-100">
+                <tr class="border-2" v-for="student in filteredStudents" :key="student.id" :class="{ 'highlighted': student.highlighted }">
+                    <td class="px-6 py-4">{{ student.fullName }}</td>
                     <td>{{ student.group }}</td>
                     <td>{{ student.birthYear }}</td>
                     <td><input type="checkbox" v-model="student.passedPractical"></td>
-                    <td><button @click="deleteStudent(student.id)">Видалити</button></td>
+                    <td><button class="bg-slate-100" @click="deleteStudent(student.id)">Видалити</button></td>
                 </tr>
             </tbody>
         </table>
